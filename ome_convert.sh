@@ -17,5 +17,4 @@ output="$OUTPUT_DIR/${basename}.ome.tif"
 
 echo "Job $SLURM_ARRAY_TASK_ID processing: $f"
 
-cd /nemo/stp/lm/working/barryd/hpc/pixi/bioio-conv
-pixi run python /nemo/stp/lm/working/barryd/hpc/projects/labs/miguel-aliaga/elisa/brainsaw-tiff-converter/convert_brainsaw_tiffs.py "$f" "$output" "${INPUT_DIR}/tilePositions.csv"
+pixi run python ./convert_brainsaw_tiffs.py "$f" "$output" "${INPUT_DIR}/tilePositions.csv"
