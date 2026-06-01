@@ -1,6 +1,6 @@
 # Pipeline for Stitching BrainSaw Images on HPC
 
-## Prerequisites
+## 0. Prerequisites
 
 You'll need to first install the following in order to run the scripts in this repository.
 
@@ -29,4 +29,17 @@ You may have previously used tools such as [pip](https://pip.pypa.io) or [conda]
 cd <path_to_this_repo>
 ml pixi
 pixi install
+```
+## 1. Convert Files
+
+The raw TIF files from the BrainSaw are currently lacking critical metadata. This will hopefully not be the case in the future, but for now, in order to use BigStitcher, we need to load each of the raw TIF files, add the necessary metadata, and then resave the files. This is all handled automatically by the [submit_ome_convert_jobs.sh](./submit_ome_convert_jobs.sh) script.
+
+Before running the conversion script you need to specify the input directory by editing the following line:
+```
+INPUT_DIR="/nemo/project/proj-miguel-aliaga-brainsaw/data/rawData/CrickSaw_260326_hml_old_young_females_hml-${i}"
+```
+
+You will also need to specify an output directory for the converted files (overwriting the raw input files is probably not sensible!). You can do this by editng the following line in the [ome_convert.sh](./ome_convert.sh) script:
+```
+
 ```
