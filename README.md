@@ -43,3 +43,11 @@ You will also need to specify an output directory for the converted files (overw
 ```
 OUTPUT_DIR="/nemo/stp/lm/working/barryd/hpc/projects/labs/miguel-aliaga/elisa/brainsaw-tiff-converter-outputs-subset"
 ```
+
+## 2. Stitch Files
+
+We can now use BigStitcher to stitch and fuse the individual tiles. You can do so by running the [run_bigstitcher.sh](./run_bigstitcher.sh) script. Again, you will need to update the input and output paths:
+```
+INPUT_DIR="/nemo/project/proj-miguel-aliaga-brainsaw/data/rawData/CrickSaw_260326_hml_old_young_females_hml-${i}"
+OUTPUT_DIR="/nemo/stp/lm/working/barryd/hpc/projects/labs/miguel-aliaga/elisa/brainsaw-tiff-converter-outputs-subset"
+```
