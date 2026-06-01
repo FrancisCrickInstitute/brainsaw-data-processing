@@ -10,5 +10,5 @@ ml Java/1.8
 mkdir -p "$OUTPUT_DIR"
 
 /nemo/stp/lm/working/barryd/hpc/Fiji.app/ImageJ-linux64 --headless -macro \
-    /nemo/stp/lm/working/barryd/hpc/projects/labs/miguel-aliaga/elisa/scripts/define_dataset.ijm \
+    ./Run_BigStitcher.ijm \
     "$INPUT_DIR,$OUTPUT_DIR"
