@@ -42,8 +42,8 @@ where `input_base_dir` is the path to your raw brainsaw images and `output_dir` 
 
 ## 2. Stitch Files
 
-We can now use BigStitcher to stitch and fuse the individual tiles. You can do so by running the [run_bigstitcher.sh](./run_bigstitcher.sh) script. Again, you will need to update the input and output paths:
+We can now use BigStitcher to stitch and fuse the individual tiles. You can do so by running the [submit_bigstitcher_jobs.sh](./submit_bigstitcher_jobs.sh) script, as follows:
 ```
-INPUT_DIR="/nemo/project/proj-miguel-aliaga-brainsaw/data/rawData/CrickSaw_260326_hml_old_young_females_hml-${i}"
-OUTPUT_DIR="/nemo/stp/lm/working/barryd/hpc/projects/labs/miguel-aliaga/elisa/brainsaw-tiff-converter-outputs-subset"
+./submit_bigstitcher_jobs.sh <input_base_dir> <output_base_dir>
 ```
+where `input_base_dir` is the path to your images to be stitched (the output from step 1 above) and `output_base_dir` is where you want the stitched files to be saved.
