@@ -24,4 +24,9 @@ Once FIJI is installed, adding new plugins should be very straightforward - inst
 
 ### Set up Python Environment
 
-You may have previously used tools such as [pip](https://pip.pypa.io) or [conda](https://docs.conda.io) to set up and manage Python environments. We now recommened [pixi](https://pixi.prefix.dev/) for these tasks - built on top of tools like pip and conda, it is much, much faster than either.
+You may have previously used tools such as [pip](https://pip.pypa.io) or [conda](https://docs.conda.io) to set up and manage Python environments. We now recommened [pixi](https://pixi.prefix.dev/) for these tasks - built on top of tools like pip and conda, it is much, much faster than either. Everything you need to set up the environment with pixi is contained the in the [pixi.toml](./pixi.toml) file in this repo. Use the following commands to set up the necessary python environment on HPC, where `path_to_this_repo` is the folder where you downloaded the files in this repository:
+```shell
+cd <path_to_this_repo>
+ml pixi
+pixi install
+```
