@@ -4,11 +4,10 @@
 #SBATCH --time=1-00:00:00
 #SBATCH --mem=4G
 #SBATCH --partition=ncpu
-# Note: --array is set dynamically by the submission script
+# Note: --array and --export are set dynamically by the submission script
 
 ml pixi
 
-OUTPUT_DIR="/nemo/stp/lm/working/barryd/hpc/projects/labs/miguel-aliaga/elisa/brainsaw-tiff-converter-outputs-subset"
 mkdir -p "$OUTPUT_DIR"
 
 mapfile -t files < <(printf '%s\n' "$INPUT_DIR"/*.tif | sort)
