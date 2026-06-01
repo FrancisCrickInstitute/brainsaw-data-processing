@@ -4,6 +4,16 @@
 
 You'll need to first install the following in order to run the scripts in this repository.
 
+### Download this Repository
+
+There are two different approaches to downloading a git repository:
+1. Click the green `Code` dropdown menu above and click `Download ZIP`. Extract the files in the ZIP file to a location in your HPC filesystem - this is where you will run the scripts from.
+2. If you are familiar with git, you can just clone the repo. Doing this in a HPC environment should be straightforward using the following commands to first load git and then clone this repository:
+    ```shell
+    ml git
+    git clone git@github.com:FrancisCrickInstitute/brainsaw-data-processing.git
+    ```
+
 ### FIJI
 
 We're going to use a [FIJI](https://fiji.sc/) plugin called [BigStitcher](https://imagej.net/plugins/bigstitcher/) to the stitching, so you will need to install your own version of FIJI - instructions on how to do so are [here](https://franciscrickinstitute.github.io/Image-Analysis-Group/software_instructions/Fiji/).
