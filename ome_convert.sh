@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH --job-name=brainsaw-conv
+#SBATCH --ntasks=1
+#SBATCH --time=1-00:00:00
+#SBATCH --mem=4G
+#SBATCH --partition=ncpu
+# Note: --array is set dynamically by the submission script
+
+ml pixi
+
+OUTPUT_DIR="/nemo/stp/lm/working/barryd/hpc/projects/labs/miguel-aliaga/elisa/brainsaw-tiff-converter-outputs-subset"
+mkdir -p "$OUTPUT_DIR"
+
+mapfile -t files < <(printf '%s\n' "$INPUT_DIR"/*.tif | sort)
+f="${files[$SLURM_ARRAY_TASK_ID]}"
+basename=$(basename "$f" .tif)
+output="$OUTPUT_DIR/${basename}.ome.tif"
+
+echo "Job $SLURM_ARRAY_TASK_ID processing: $f"
+
+cd /nemo/stp/lm/working/barryd/hpc/pixi/bioio-conv
+pixi run python /nemo/stp/lm/working/barryd/hpc/projects/labs/miguel-aliaga/elisa/brainsaw-tiff-converter/convert_brainsaw_tiffs.py "$f" "$output" "${INPUT_DIR}/tilePositions.csv"
