@@ -32,17 +32,13 @@ pixi install
 ```
 ## 1. Convert Files
 
-The raw TIF files from the BrainSaw are currently lacking critical metadata. This will hopefully not be the case in the future, but for now, in order to use BigStitcher, we need to load each of the raw TIF files, add the necessary metadata, and then resave the files. This is all handled automatically by the [submit_ome_convert_jobs.sh](./submit_ome_convert_jobs.sh) script.
+The raw TIF files from the BrainSaw are currently lacking critical metadata. This will hopefully not be the case in the future, but for now, in order to use BigStitcher, we need to load each of the raw TIF files, add the necessary metadata, and then resave the files. This is all handled automatically by the [submit_ome_convert_jobs.sh](./submit_ome_convert_jobs.sh) script, which you can run as follows:
 
-Before running the conversion script you need to specify the input directory by editing the following line:
 ```
-INPUT_DIR="/nemo/project/proj-miguel-aliaga-brainsaw/data/rawData/CrickSaw_260326_hml_old_young_females_hml-${i}"
+./submit_ome_convert_jobs.sh <input_base_dir> <output_dir>
 ```
 
-You will also need to specify an output directory for the converted files (overwriting the raw input files is probably not sensible!). You can do this by editng the following line in the [ome_convert.sh](./ome_convert.sh) script:
-```
-OUTPUT_DIR="/nemo/stp/lm/working/barryd/hpc/projects/labs/miguel-aliaga/elisa/brainsaw-tiff-converter-outputs-subset"
-```
+where `input_base_dir` is the path to your raw brainsaw images and `output_dir` is where you want the updated files to be saved.
 
 ## 2. Stitch Files
 
