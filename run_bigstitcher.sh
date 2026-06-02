@@ -9,8 +9,6 @@ ml Java/1.8
 
 mkdir -p "$OUTPUT_DIR"
 
-timeout 5m /nemo/stp/lm/working/barryd/hpc/Fiji.app/ImageJ-linux64 --headless -macro \
-    ./Run_BigStitcher.ijm \
-    "$INPUT_DIR,$OUTPUT_DIR"
-	
+timeout 5m "$FIJI_PATH" --headless -macro ./Run_BigStitcher.ijm "$INPUT_DIR,$OUTPUT_DIR"
+
 exit 0
