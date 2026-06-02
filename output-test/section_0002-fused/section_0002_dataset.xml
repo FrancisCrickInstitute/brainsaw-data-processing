@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpimData version="0.2">
+  <BasePath type="relative">.</BasePath>
+  <SequenceDescription>
+    <ImageLoader format="bdv.hdf5">
+      <hdf5 type="relative">section_0002_dataset.h5</hdf5>
+    </ImageLoader>
+    <ViewSetups>
+      <ViewSetup>
+        <id>0</id>
+        <name>0</name>
+        <size>854 854 10</size>
+        <voxelSize>
+          <unit>µm</unit>
+          <size>1.0 1.0 1.0</size>
+        </voxelSize>
+        <attributes>
+          <illumination>0</illumination>
+          <channel>0</channel>
+          <tile>0</tile>
+          <angle>0</angle>
+        </attributes>
+      </ViewSetup>
+      <ViewSetup>
+        <id>1</id>
+        <name>1</name>
+        <size>854 854 10</size>
+        <voxelSize>
+          <unit>µm</unit>
+          <size>1.0 1.0 1.0</size>
+        </voxelSize>
+        <attributes>
+          <illumination>0</illumination>
+          <channel>0</channel>
+          <tile>1</tile>
+          <angle>0</angle>
+        </attributes>
+      </ViewSetup>
+      <ViewSetup>
+        <id>2</id>
+        <name>2</name>
+        <size>854 854 10</size>
+        <voxelSize>
+          <unit>µm</unit>
+          <size>1.0 1.0 1.0</size>
+        </voxelSize>
+        <attributes>
+          <illumination>0</illumination>
+          <channel>0</channel>
+          <tile>2</tile>
+          <angle>0</angle>
+        </attributes>
+      </ViewSetup>
+      <ViewSetup>
+        <id>3</id>
+        <name>3</name>
+        <size>854 854 10</size>
+        <voxelSize>
+          <unit>µm</unit>
+          <size>1.0 1.0 1.0</size>
+        </voxelSize>
+        <attributes>
+          <illumination>0</illumination>
+          <channel>1</channel>
+          <tile>0</tile>
+          <angle>0</angle>
+        </attributes>
+      </ViewSetup>
+      <ViewSetup>
+        <id>4</id>
+        <name>4</name>
+        <size>854 854 10</size>
+        <voxelSize>
+          <unit>µm</unit>
+          <size>1.0 1.0 1.0</size>
+        </voxelSize>
+        <attributes>
+          <illumination>0</illumination>
+          <channel>1</channel>
+          <tile>1</tile>
+          <angle>0</angle>
+        </attributes>
+      </ViewSetup>
+      <ViewSetup>
+        <id>5</id>
+        <name>5</name>
+        <size>854 854 10</size>
+        <voxelSize>
+          <unit>µm</unit>
+          <size>1.0 1.0 1.0</size>
+        </voxelSize>
+        <attributes>
+          <illumination>0</illumination>
+          <channel>1</channel>
+          <tile>2</tile>
+          <angle>0</angle>
+        </attributes>
+      </ViewSetup>
+      <Attributes name="illumination">
+        <Illumination>
+          <id>0</id>
+          <name>0</name>
+        </Illumination>
+      </Attributes>
+      <Attributes name="channel">
+        <Channel>
+          <id>0</id>
+          <name>0</name>
+        </Channel>
+        <Channel>
+          <id>1</id>
+          <name>1</name>
+        </Channel>
+      </Attributes>
+      <Attributes name="tile">
+        <Tile>
+          <id>0</id>
+          <name>0</name>
+          <location>13605.428 3416.56 20.0</location>
+        </Tile>
+        <Tile>
+          <id>1</id>
+          <name>1</name>
+          <location>12812.324 3416.56 20.0</location>
+        </Tile>
+        <Tile>
+          <id>2</id>
+          <name>2</name>
+          <location>12019.220000000001 3416.56 20.0</location>
+        </Tile>
+      </Attributes>
+      <Attributes name="angle">
+        <Angle>
+          <id>0</id>
+          <name>0</name>
+        </Angle>
+      </Attributes>
+    </ViewSetups>
+    <Timepoints type="pattern">
+      <integerpattern>0</integerpattern>
+    </Timepoints>
+    <MissingViews />
+  </SequenceDescription>
+  <ViewRegistrations>
+    <ViewRegistration timepoint="0" setup="0">
+      <ViewTransform type="affine">
+        <Name>Stitching Transform</Name>
+        <affine>1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>Translation</Name>
+        <affine>1.0 0.0 0.0 13605.428 0.0 1.0 0.0 3416.56 0.0 0.0 1.0 20.0</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>calibration</Name>
+        <affine>1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0</affine>
+      </ViewTransform>
+    </ViewRegistration>
+    <ViewRegistration timepoint="0" setup="1">
+      <ViewTransform type="affine">
+        <Name>Stitching Transform</Name>
+        <affine>1.0 0.0 0.0 -5.50598083337718 0.0 1.0 0.0 -5.486491169780493 0.0 0.0 1.0 -0.059210508224289526</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>Translation</Name>
+        <affine>1.0 0.0 0.0 12812.324 0.0 1.0 0.0 3416.56 0.0 0.0 1.0 20.0</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>calibration</Name>
+        <affine>1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0</affine>
+      </ViewTransform>
+    </ViewRegistration>
+    <ViewRegistration timepoint="0" setup="2">
+      <ViewTransform type="affine">
+        <Name>Stitching Transform</Name>
+        <affine>1.0 0.0 0.0 -0.43296628186544694 0.0 1.0 0.0 -31.20407430116029 0.0 0.0 1.0 -0.064296589706057</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>Translation</Name>
+        <affine>1.0 0.0 0.0 12019.220000000001 0.0 1.0 0.0 3416.56 0.0 0.0 1.0 20.0</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>calibration</Name>
+        <affine>1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0</affine>
+      </ViewTransform>
+    </ViewRegistration>
+    <ViewRegistration timepoint="0" setup="3">
+      <ViewTransform type="affine">
+        <Name>Stitching Transform</Name>
+        <affine>1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>Translation</Name>
+        <affine>1.0 0.0 0.0 13605.428 0.0 1.0 0.0 3416.56 0.0 0.0 1.0 20.0</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>calibration</Name>
+        <affine>1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0</affine>
+      </ViewTransform>
+    </ViewRegistration>
+    <ViewRegistration timepoint="0" setup="4">
+      <ViewTransform type="affine">
+        <Name>Stitching Transform</Name>
+        <affine>1.0 0.0 0.0 -5.50598083337718 0.0 1.0 0.0 -5.486491169780493 0.0 0.0 1.0 -0.059210508224289526</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>Translation</Name>
+        <affine>1.0 0.0 0.0 12812.324 0.0 1.0 0.0 3416.56 0.0 0.0 1.0 20.0</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>calibration</Name>
+        <affine>1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0</affine>
+      </ViewTransform>
+    </ViewRegistration>
+    <ViewRegistration timepoint="0" setup="5">
+      <ViewTransform type="affine">
+        <Name>Stitching Transform</Name>
+        <affine>1.0 0.0 0.0 -0.43296628186544694 0.0 1.0 0.0 -31.20407430116029 0.0 0.0 1.0 -0.064296589706057</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>Translation</Name>
+        <affine>1.0 0.0 0.0 12019.220000000001 0.0 1.0 0.0 3416.56 0.0 0.0 1.0 20.0</affine>
+      </ViewTransform>
+      <ViewTransform type="affine">
+        <Name>calibration</Name>
+        <affine>1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0</affine>
+      </ViewTransform>
+    </ViewRegistration>
+  </ViewRegistrations>
+  <ViewInterestPoints />
+  <BoundingBoxes />
+  <PointSpreadFunctions />
+  <StitchingResults>
+    <PairwiseResult view_setup_a="2,5" view_setup_b="1,4" tp_a="0,0" tp_b="0,0">
+      <shift>1.0 0.0 0.0 -5.073014551509914 0.0 1.0 0.0 25.717583131379797 0.0 0.0 1.0 0.005086081481763927</shift>
+      <correlation>0.737889675569473</correlation>
+      <hash>226733.272</hash>
+      <overlap_boundingbox>12812.0 3416.0 20.0 12873.0 4270.0 29.0</overlap_boundingbox>
+    </PairwiseResult>
+    <PairwiseResult view_setup_a="1,4" view_setup_b="0,3" tp_a="0,0" tp_b="0,0">
+      <shift>1.0 0.0 0.0 5.505980833378999 0.0 1.0 0.0 5.486491169780038 0.0 0.0 1.0 0.059210508224285974</shift>
+      <correlation>0.2779474449108559</correlation>
+      <hash>237836.728</hash>
+      <overlap_boundingbox>13605.0 3416.0 20.0 13666.0 4270.0 29.0</overlap_boundingbox>
+    </PairwiseResult>
+  </StitchingResults>
+  <IntensityAdjustments />
+</SpimData>

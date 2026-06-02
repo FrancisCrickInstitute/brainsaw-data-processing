@@ -1,7 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=brainsaw-conv
 #SBATCH --ntasks=1
-#SBATCH --time=1-00:00:00
 #SBATCH --mem=4G
 #SBATCH --partition=ncpu
 # Note: --array and --export are set dynamically by the submission script

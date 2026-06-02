@@ -35,3 +35,5 @@ macro "Run_BigStitcher"{
 	run("Image Fusion", "select=file:" + project_filepath + " process_angle=[All angles] process_channel=[All channels] process_illumination=[All illuminations] process_tile=[All tiles] process_timepoint=[All Timepoints] bounding_box=[All Views] downsampling=1 interpolation=[Linear Interpolation] fusion_type=[Avg, Blending] pixel_type=[16-bit unsigned integer] interest_points_for_non_rigid=[-= Disable Non-Rigid =-] produce=[Each timepoint & channel] fused_image=[Save as (compressed) TIFF stacks] define_input=[Auto-load from input data (values shown below)] output_file_directory=" + output + " filename_addition=fused");
 	setBatchMode(false);
 }
+
+System.exit(0);
