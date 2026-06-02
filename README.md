@@ -40,12 +40,24 @@ You now have everything ready to stitch and fuse your images. The scripts in thi
 
 To start the stitching process, using the demo data in this repo as an example, run the [submit_all_jobs.sh](./submit_all_jobs.sh) as follows:
 ```
-./submit_all_jobs.sh ./input-test ./temp ./output-test
+./submit_all_jobs.sh -i <input_base_dir> -c <converted_base_dir> -s <stitched_base_dir> [-f array_indices] [-n section_indices] [-x]
 ```
-where `input-test` is the location of the raw brainsaw data, `temp` is where the temporary converted files will be stored and outputs will be saved in `output-test`.
+where each parameter specifes the following:
 
-Alternatively, the script can be run as follows:
+| Parameter Flag | Parameter Description |
+| -------------- | --------------------- |
+| -i | Input base directory (required) |
+| -c | Converted files base directory (required) |
+| -s | Stitched output base directory (required) |
+| -f | File indices to process (optional, e.g. '246,247,248') |
+| -n | Section indices to process (optional, e.g. '1,3,5') |
+| -x | Delete converted files after successful stitching (optional) |
+
+For example:
 ```
-CLEANUP=true ./submit_all_jobs.sh ./input-test ./temp ./output-test
+# Full run with cleanup
+./submit_all_jobs.sh -i /input -c /converted -s /stitched -x
+
+# Specific tiles and sections, no cleanup
+./submit_all_jobs.sh -i /input -c /converted -s /stitched -f "246,247,248" -n "1,3,5"
 ```
-This will automatically delete all the temporary files in `temp` on completion of stitching.
