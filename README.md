@@ -42,7 +42,7 @@ You now have everything ready to stitch and fuse your images. The scripts in thi
 > Scripts must be executed from within the directory containing this repository.
 
 To start the stitching process, using the demo data in this repo as an example, run the [submit_all_jobs.sh](./submit_all_jobs.sh) as follows:
-```
+```shell
 cd <path_to_this_repo>
 ./submit_all_jobs.sh -i <input_base_dir> -c <converted_base_dir> -s <stitched_base_dir> [-f array_indices] [-n section_indices] [-x]
 ```
@@ -59,7 +59,7 @@ where each parameter specifies the following:
 | -x | Delete converted files after successful stitching (optional) |
 
 For example:
-```
+```shell
 # Full run with cleanup
 ./submit_all_jobs.sh -i /input -c /converted -s /stitched -j ../Fiji.app/fiji-linux-x64 -x
 
