@@ -1,10 +1,11 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: ./submit_all_jobs.sh -i <input_base_dir> -c <converted_base_dir> -s <stitched_base_dir> [-f array_indices] [-n section_indices] [-x]"
+    echo "Usage: ./submit_all_jobs.sh -i <input_base_dir> -c <converted_base_dir> -s <stitched_base_dir> -j <fiji_path> [-f array_indices] [-n section_indices] [-x]"
     echo "  -i  Input base directory (required)"
     echo "  -c  Converted files base directory (required)"
     echo "  -s  Stitched output base directory (required)"
+    echo "  -j  Path to FIJI executable (required)"
     echo "  -f  File indices to process (optional, e.g. '246,247,248')"
     echo "  -n  Section indices to process (optional, e.g. '1,3,5')"
     echo "  -x  Delete converted files after successful stitching (optional)"
@@ -15,15 +16,17 @@ usage() {
 INPUT_BASE_DIR=""
 CONVERTED_BASE_DIR=""
 STITCHED_BASE_DIR=""
+FIJI_PATH=""
 ARRAY_INDICES=""
 SECTION_INDICES=""
 CLEANUP=false
 
-while getopts "i:c:s:f:n:x" opt; do
+while getopts "i:c:s:j:f:n:x" opt; do
     case $opt in
         i) INPUT_BASE_DIR="$OPTARG" ;;
         c) CONVERTED_BASE_DIR="$OPTARG" ;;
         s) STITCHED_BASE_DIR="$OPTARG" ;;
+        j) FIJI_PATH="$OPTARG" ;;
         f) ARRAY_INDICES="$OPTARG" ;;
         n) SECTION_INDICES="$OPTARG" ;;
         x) CLEANUP=true ;;
@@ -32,8 +35,8 @@ while getopts "i:c:s:f:n:x" opt; do
 done
 
 # Check required arguments
-if [ -z "$INPUT_BASE_DIR" ] || [ -z "$CONVERTED_BASE_DIR" ] || [ -z "$STITCHED_BASE_DIR" ]; then
-    echo "Error: -i, -c, and -s are required"
+if [ -z "$INPUT_BASE_DIR" ] || [ -z "$CONVERTED_BASE_DIR" ] || [ -z "$STITCHED_BASE_DIR" ] || [ -z "$FIJI_PATH" ]; then
+    echo "Error: -i, -c, -s and -j are required"
     usage
 fi
 
@@ -68,7 +71,7 @@ for INPUT_DIR in "${dirs[@]}"; do
     echo "Submitted conversion job $conv_job_id for $INPUT_DIR"
 
     stitch_job_id=$(sbatch --dependency=afterok:$conv_job_id \
-                           --export=INPUT_DIR="$CONVERTED_DIR",OUTPUT_DIR="$STITCHED_DIR" \
+                           --export=INPUT_DIR="$CONVERTED_DIR",OUTPUT_DIR="$STITCHED_DIR",FIJI_PATH="$FIJI_PATH" \
                            --parsable \
                            run_bigstitcher.sh)
     echo "Submitted stitching job $stitch_job_id for $CONVERTED_DIR"
