@@ -49,6 +49,7 @@ where each parameter specifes the following:
 | -i | Input base directory (required) |
 | -c | Converted files base directory (required) |
 | -s | Stitched output base directory (required) |
+| -j | Path to FIJI executable (required) |
 | -f | File indices to process (optional, e.g. '246,247,248') |
 | -n | Section indices to process (optional, e.g. '1,3,5') |
 | -x | Delete converted files after successful stitching (optional) |
@@ -56,8 +57,8 @@ where each parameter specifes the following:
 For example:
 ```
 # Full run with cleanup
-./submit_all_jobs.sh -i /input -c /converted -s /stitched -x
+./submit_all_jobs.sh -i /input -c /converted -s /stitched -j ../Fiji.app/fiji-linux-x64 -x
 
 # Specific tiles and sections, no cleanup
-./submit_all_jobs.sh -i /input -c /converted -s /stitched -f "246,247,248" -n "1,3,5"
+./submit_all_jobs.sh -i /input -c /converted -s /stitched -j ../Fiji.app/fiji-linux-x64 -f "246,247,248" -n "1,3,5"
 ```
