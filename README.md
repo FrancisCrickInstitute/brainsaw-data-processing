@@ -1,10 +1,12 @@
 # Pipeline for Stitching BrainSaw Images on HPC
 
-## 0. Prerequisites
+This is a set of scripts to process and stitch individual brainsaw tiles into fused sections. Processing occurs in parallel, so should be much faster than running on a local workstations.
+
+## 1. Prerequisites
 
 You'll need to first install the following in order to run the scripts in this repository.
 
-### 0.1 Download this Repository
+### 1.1 Download this Repository
 
 There are two different approaches to downloading a git repository:
 1. Click the green `Code` dropdown menu above and click `Download ZIP`. Extract the files in the ZIP file to a location in your HPC filesystem - this is where you will run the scripts from.
@@ -14,15 +16,15 @@ There are two different approaches to downloading a git repository:
     git clone git@github.com:FrancisCrickInstitute/brainsaw-data-processing.git
     ```
 
-### 0.2 FIJI
+### 1.2 FIJI
 
 We're going to use a [FIJI](https://fiji.sc/) plugin called [BigStitcher](https://imagej.net/plugins/bigstitcher/) to the stitching, so you will need to install your own version of FIJI - instructions on how to do so are [here](https://franciscrickinstitute.github.io/Image-Analysis-Group/software_instructions/Fiji/).
 
-### 0.3 BigStitcher
+### 1.3 BigStitcher
 
 Once FIJI is installed, adding new plugins should be very straightforward - instructions on how to install BigStitcher are [here](https://imagej.net/plugins/bigstitcher/#download).
 
-### 0.4 Set up Python Environment
+### 1.4 Set up Python Environment
 
 You may have previously used tools such as [pip](https://pip.pypa.io) or [conda](https://docs.conda.io) to set up and manage Python environments. We now recommened [pixi](https://pixi.prefix.dev/) for these tasks - built on top of tools like pip and conda, it is much, much faster than either. Everything you need to set up the environment with pixi is contained the in the [pixi.toml](./pixi.toml) file in this repo. Use the following commands to set up the necessary python environment on HPC, where `path_to_this_repo` is the folder where you downloaded the files in this repository:
 ```shell
@@ -30,20 +32,20 @@ cd <path_to_this_repo>
 ml pixi
 pixi install
 ```
-## 1. Convert Files
+## 2. Run Stitching
 
-The raw TIF files from the BrainSaw are currently lacking critical metadata. This will hopefully not be the case in the future, but for now, in order to use BigStitcher, we need to load each of the raw TIF files, add the necessary metadata, and then resave the files. This is all handled automatically by the [submit_ome_convert_jobs.sh](./submit_ome_convert_jobs.sh) script, which you can run as follows:
+You now have everything ready to stitch and fuse your images. The scripts in this repo perform two tasks:
+1. *Temporary file conversion:* The raw TIF files from the BrainSaw are currently lacking critical metadata. This will hopefully not be the case in the future, but for now, in order to use BigStitcher, we need to load each of the raw TIF files, add the necessary metadata, and then resave the files. This is all handled automatically, but you need to specify a temporary location for the converted files to be stored.
+2. *Tile stitching:* BigStitcher is run on the converted files and produces a fused output for each section. Example outputs can be found in the [output-test](./output-test) folder.
 
+To start the stitching process, using the demo data in this repo as an example, run the [submit_all_jobs.sh](./submit_all_jobs.sh) as follows:
 ```
-./submit_ome_convert_jobs.sh <input_base_dir> <output_dir>
+./submit_all_jobs.sh ./input-test ./temp ./output-test
 ```
+where `input-test` is the location of the raw brainsaw data, `temp` is where the temporary converted files will be stored and outputs will be saved in `output-test`.
 
-where `input_base_dir` is the path to your raw brainsaw images and `output_dir` is where you want the updated files to be saved.
-
-## 2. Stitch Files
-
-We can now use BigStitcher to stitch and fuse the individual tiles. You can do so by running the [submit_bigstitcher_jobs.sh](./submit_bigstitcher_jobs.sh) script, as follows:
+Alternatively, the script can be run as follows:
 ```
-./submit_bigstitcher_jobs.sh <input_base_dir> <output_base_dir>
+CLEANUP=true ./submit_all_jobs.sh ./input-test ./temp ./output-test
 ```
-where `input_base_dir` is the path to your images to be stitched (the output from step 1 above) and `output_base_dir` is where you want the stitched files to be saved.
+This will automatically delete all the temporary files in `temp` on completion of stitching.
