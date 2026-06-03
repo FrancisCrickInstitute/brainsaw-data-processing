@@ -54,6 +54,7 @@ where each parameter specifies the following:
 | -c | Converted files base directory (required) |
 | -s | Stitched output base directory (required) |
 | -j | Path to FIJI executable, ImageJ-linux64 (required) |
+| -l | Only process input subdirectories containing this text (optional, e.g. 'CrickSaw') |
 | -f | File indices to process (optional, e.g. '246,247,248') |
 | -n | Section indices to process (optional, e.g. '1,3,5') |
 | -x | Delete converted files after successful stitching (optional) |
