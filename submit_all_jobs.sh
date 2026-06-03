@@ -1,11 +1,12 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: ./submit_all_jobs.sh -i <input_base_dir> -c <converted_base_dir> -s <stitched_base_dir> -j <fiji_path> [-f array_indices] [-n section_indices] [-x]"
+    echo "Usage: ./submit_all_jobs.sh -i <input_base_dir> -c <converted_base_dir> -s <stitched_base_dir> -j <fiji_path> [-l label_filter] [-f array_indices] [-n section_indices] [-x]"
     echo "  -i  Input base directory (required)"
     echo "  -c  Converted files base directory (required)"
     echo "  -s  Stitched output base directory (required)"
     echo "  -j  Path to FIJI executable (required)"
+    echo "  -l  Only process subdirectories containing this text (optional, e.g. 'hml_old')"
     echo "  -f  File indices to process (optional, e.g. '246,247,248')"
     echo "  -n  Section indices to process (optional, e.g. '1,3,5')"
     echo "  -x  Delete converted files after successful stitching (optional)"
@@ -17,16 +18,18 @@ INPUT_BASE_DIR=""
 CONVERTED_BASE_DIR=""
 STITCHED_BASE_DIR=""
 FIJI_PATH=""
+LABEL_FILTER=""
 ARRAY_INDICES=""
 SECTION_INDICES=""
 CLEANUP=false
 
-while getopts "i:c:s:j:f:n:x" opt; do
+while getopts "i:c:s:j:l:f:n:x" opt; do
     case $opt in
         i) INPUT_BASE_DIR="$OPTARG" ;;
         c) CONVERTED_BASE_DIR="$OPTARG" ;;
         s) STITCHED_BASE_DIR="$OPTARG" ;;
         j) FIJI_PATH="$OPTARG" ;;
+        l) LABEL_FILTER="$OPTARG" ;;
         f) ARRAY_INDICES="$OPTARG" ;;
         n) SECTION_INDICES="$OPTARG" ;;
         x) CLEANUP=true ;;
@@ -40,7 +43,7 @@ if [ -z "$INPUT_BASE_DIR" ] || [ -z "$CONVERTED_BASE_DIR" ] || [ -z "$STITCHED_B
     usage
 fi
 
-# Build list of directories to process
+# Build list of directories to process, optionally filtered by label
 if [ -n "$SECTION_INDICES" ]; then
     dirs=()
     IFS=',' read -ra sections <<< "$SECTION_INDICES"
@@ -52,6 +55,12 @@ else
 fi
 
 for INPUT_DIR in "${dirs[@]}"; do
+
+    # Skip directories that don't contain the label filter string
+    if [ -n "$LABEL_FILTER" ] && [[ "$INPUT_DIR" != *"$LABEL_FILTER"* ]]; then
+        echo "Skipping $INPUT_DIR - does not match label filter '$LABEL_FILTER'"
+        continue
+    fi
 
     dirname=$(basename "$INPUT_DIR")
     CONVERTED_DIR="${CONVERTED_BASE_DIR}/${dirname}"
