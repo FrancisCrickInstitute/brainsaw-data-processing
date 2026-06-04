@@ -1,3 +1,5 @@
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/release/python-31313/) ![Commit activity](https://img.shields.io/github/commit-activity/y/FrancisCrickInstitute/brainsaw-data-processing?style=plastic) ![GitHub](https://img.shields.io/github/license/FrancisCrickInstitute/brainsaw-data-processing?color=green&style=plastic)
+
 # Pipeline for Stitching BrainSaw Images on HPC
 
 This is a set of scripts to process and stitch individual brainsaw tiles into fused sections. Processing occurs in parallel, so should be much faster than running on a local workstations.
