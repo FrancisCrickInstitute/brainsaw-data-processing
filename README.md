@@ -1,4 +1,4 @@
-[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/release/python-31313/) ![Commit activity](https://img.shields.io/github/commit-activity/y/FrancisCrickInstitute/brainsaw-data-processing?style=plastic) ![GitHub](https://img.shields.io/github/license/FrancisCrickInstitute/brainsaw-data-processing?color=green&style=plastic)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/release/python-31313/) ![Commit activity](https://img.shields.io/github/commit-activity/y/FrancisCrickInstitute/brainsaw-data-processing?style=plastic) ![GitHub](https://img.shields.io/github/license/FrancisCrickInstitute/brainsaw-data-processing?color=green&style=plastic) [![Built with Pixi](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/prefix-dev/pixi/main/assets/badge/v0.json)](https://pixi.sh)
 
 # Pipeline for Stitching BrainSaw Images on HPC
 
