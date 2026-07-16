@@ -37,7 +37,7 @@ pixi install
 ## 2. Run Stitching
 
 You now have everything ready to stitch and fuse your images. The scripts in this repo perform two tasks:
-1. *Temporary file conversion:* The raw TIF files from the BrainSaw are currently lacking critical metadata. This will hopefully not be the case in the future, but for now, in order to use BigStitcher, we need to load each of the raw TIF files, add the necessary metadata, and then resave the files. This is all handled automatically, but you need to specify a temporary location for the converted files to be stored.
+1. *Temporary file conversion:* The raw TIF files from the BrainSaw are currently lacking critical metadata. This will hopefully not be the case in the future, but for now, in order to use BigStitcher, we need to load each of the raw TIF files, add the necessary metadata, and then resave the files. This is all handled automatically, but you need to specify a temporary location for the converted files to be stored. Stage positions are read from a `tilePositions.csv` file in each input section directory, which is generated automatically from `tilePositions.mat` if it isn't already present.
 2. *Tile stitching:* BigStitcher is run on the converted files and produces a fused output for each section. Example outputs can be found in the [output-test](./output-test) folder.
 
 > [!IMPORTANT]
