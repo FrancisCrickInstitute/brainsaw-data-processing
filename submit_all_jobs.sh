@@ -73,7 +73,13 @@ for INPUT_DIR in "${dirs[@]}"; do
         array_spec="0-$((num_files - 1))"
     fi
 
+    positions_job_id=$(sbatch --export=INPUT_DIR="$INPUT_DIR" \
+                              --parsable \
+                              prepare_positions.sh)
+    echo "Submitted positions job $positions_job_id for $INPUT_DIR"
+
     conv_job_id=$(sbatch --array="$array_spec" \
+                         --dependency=afterok:$positions_job_id \
                          --export=INPUT_DIR="$INPUT_DIR",OUTPUT_DIR="$CONVERTED_DIR" \
                          --parsable \
                          ome_convert.sh)
