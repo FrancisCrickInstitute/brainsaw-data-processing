@@ -20,15 +20,14 @@ There are no lint/test commands configured in this repo (no test suite, linter, 
 
 ## Pipeline architecture
 
-The pipeline is a two-stage SLURM job chain, orchestrated per input subdirectory (one subdirectory = one section):
+The pipeline is a SLURM job chain, orchestrated per input subdirectory (one subdirectory = one section):
 
-1. **`submit_all_jobs.sh`** — entry point. For each matching input subdirectory, submits an array job (`ome_convert.sh`) followed by a dependent job (`run_bigstitcher.sh`, via `--dependency=afterok`), and optionally a cleanup job (`--dependency=afterany`) that deletes converted files once fused output exists. Directory selection can be filtered by label (`-l`) or restricted to specific section indices (`-n`); tile conversion can be restricted to specific array indices (`-f`).
-2. **`ome_convert.sh`** — SLURM array task. Each array index maps to one raw `.tif` tile in the input directory (files sorted, indexed by `$SLURM_ARRAY_TASK_ID`). Calls `convert_brainsaw_tiffs.py` on that tile plus the section's `tilePositions.csv`.
-3. **`convert_brainsaw_tiffs.py`** — repairs missing OME metadata on a single raw tile: parses the tile/z index from the filename (`hml-(\d{4})_(\d{5})\.tif`), looks up that tile's stage position from `tilePositions.csv`, builds OME `Pixels`/`Plane`/`TiffData` metadata (stage position, physical pixel sizes), int16→uint16-safe conversion if needed, and writes an OME-TIFF via `bioio`.
-4. **`run_bigstitcher.sh`** — runs FIJI headless (`ml Java/1.8`) against `Run_BigStitcher.ijm` on the converted directory, with a 5-minute timeout.
-5. **`Run_BigStitcher.ijm`** — defines a BigStitcher multi-view dataset from the converted OME-TIFFs (re-saved as multiresolution HDF5), calculates pairwise shifts (phase correlation), filters/optimizes shifts globally, then fuses and saves per-timepoint/channel TIFF stacks to the output directory.
-
-`mat_to_csv.py` is a standalone one-off utility (not part of the pipeline invocation chain) that converts a BrainSaw `tilePositions.mat` file to `tilePositions.csv` — the same CSV format `convert_brainsaw_tiffs.py` expects for stage positions. Its `parent_d` path is hardcoded and would need editing per-dataset.
+1. **`submit_all_jobs.sh`** — entry point. For each matching input subdirectory, submits a positions job (`prepare_positions.sh`), then an array job (`ome_convert.sh`, `--dependency=afterok` on the positions job), then a dependent stitching job (`run_bigstitcher.sh`, `--dependency=afterok` on the array job), and optionally a cleanup job (`--dependency=afterany`) that deletes converted files once fused output exists. Directory selection can be filtered by label (`-l`) or restricted to specific section indices (`-n`); tile conversion can be restricted to specific array indices (`-f`).
+2. **`prepare_positions.sh`** / **`mat_to_csv.py`** — ensures `tilePositions.csv` exists in the input section directory before conversion starts, converting it from `tilePositions.mat` (BrainSaw's raw stage-position export, key `positionArray`) if the CSV isn't already there. Runs once per section, ahead of the conversion array job, to avoid every array task racing to generate the same file.
+3. **`ome_convert.sh`** — SLURM array task. Each array index maps to one raw `.tif` tile in the input directory (files sorted, indexed by `$SLURM_ARRAY_TASK_ID`). Calls `convert_brainsaw_tiffs.py` on that tile plus the section's `tilePositions.csv`.
+4. **`convert_brainsaw_tiffs.py`** — repairs missing OME metadata on a single raw tile: parses the tile/z index from the filename (`hml-(\d{4})_(\d{5})\.tif`), looks up that tile's stage position from `tilePositions.csv`, builds OME `Pixels`/`Plane`/`TiffData` metadata (stage position, physical pixel sizes), int16→uint16-safe conversion if needed, and writes an OME-TIFF via `bioio`.
+5. **`run_bigstitcher.sh`** — runs FIJI headless (`ml Java/1.8`) against `Run_BigStitcher.ijm` on the converted directory, with a 5-minute timeout.
+6. **`Run_BigStitcher.ijm`** — defines a BigStitcher multi-view dataset from the converted OME-TIFFs (re-saved as multiresolution HDF5), calculates pairwise shifts (phase correlation), filters/optimizes shifts globally, then fuses and saves per-timepoint/channel TIFF stacks to the output directory.
 
 Key invariant: **stage positions and tile/z indices are correlated by row position** in `tilePositions.csv` (`positions.iloc[tile_index - 1]`), not by any ID column — the CSV row order must match the tile numbering encoded in filenames.
 
