@@ -62,6 +62,12 @@ for INPUT_DIR in "${dirs[@]}"; do
         continue
     fi
 
+    num_files=$(find "$INPUT_DIR" -maxdepth 1 -name '*.tif' | wc -l)
+    if [ "$num_files" -eq 0 ]; then
+        echo "Skipping $INPUT_DIR - no .tif tiles found (not a section directory)"
+        continue
+    fi
+
     dirname=$(basename "$INPUT_DIR")
     CONVERTED_DIR="${CONVERTED_BASE_DIR}/${dirname}"
     STITCHED_DIR="${STITCHED_BASE_DIR}/${dirname}-fused"
@@ -69,7 +75,6 @@ for INPUT_DIR in "${dirs[@]}"; do
     if [ -n "$ARRAY_INDICES" ]; then
         array_spec="$ARRAY_INDICES"
     else
-        num_files=$(ls "$INPUT_DIR"/*.tif | wc -l)
         array_spec="0-$((num_files - 1))"
     fi
 
