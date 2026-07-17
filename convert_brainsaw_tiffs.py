@@ -22,7 +22,7 @@ def parse_filename(path: Path):
 
 
 def load_positions(csv_path: Path) -> pd.DataFrame:
-    return pd.read_csv(csv_path)
+    return pd.read_csv(csv_path, header=None)
 
 
 def get_stage_position(positions: pd.DataFrame, tile_index: int, z_index: int,
@@ -30,8 +30,8 @@ def get_stage_position(positions: pd.DataFrame, tile_index: int, z_index: int,
     row = positions.iloc[tile_index - 1]
     mm_to_um = 1000
     return (
-        float(row['positionArray_3']) * mm_to_um,
-        float(-1 * row['positionArray_4']) * mm_to_um,
+        float(row.iloc[2]) * mm_to_um,
+        float(-1 * row.iloc[3]) * mm_to_um,
         float(z_index * num_z_slices * pixel_size_z),
     )
 
