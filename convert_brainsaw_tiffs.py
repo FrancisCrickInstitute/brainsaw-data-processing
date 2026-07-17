@@ -13,7 +13,7 @@ from ome_types.model.simple_types import UnitsLength, PixelType
 
 def parse_filename(path: Path):
     """Extract tile index and z index from filename."""
-    match = re.search(r'hml-(\d{4})_(\d{5})\.tif$', path.name)
+    match = re.search(r'-(\d{4})_(\d{5})\.tif$', path.name)
     if not match:
         raise ValueError(f"Could not parse filename: {path.name}")
     z_index = int(match.group(1))
