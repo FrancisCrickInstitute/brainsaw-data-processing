@@ -16,4 +16,4 @@ output="$OUTPUT_DIR/${basename}.ome.tif"
 
 echo "Job $SLURM_ARRAY_TASK_ID processing: $f"
 
-pixi run python ./convert_brainsaw_tiffs.py "$f" "$output" "${INPUT_DIR}/tilePositions.csv"
+pixi run --frozen python ./convert_brainsaw_tiffs.py "$f" "$output" "${INPUT_DIR}/tilePositions.csv"

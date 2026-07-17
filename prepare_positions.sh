@@ -7,4 +7,4 @@
 
 ml pixi
 
-pixi run python ./mat_to_csv.py "$INPUT_DIR"
+pixi run --frozen python ./mat_to_csv.py "$INPUT_DIR"
