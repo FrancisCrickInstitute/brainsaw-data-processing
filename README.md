@@ -37,7 +37,7 @@ pixi install
 ## 2. Run Stitching
 
 You now have everything ready to stitch and fuse your images. The scripts in this repo perform two tasks:
-1. *Temporary file conversion:* The raw TIF files from the BrainSaw are currently lacking critical metadata. This will hopefully not be the case in the future, but for now, in order to use BigStitcher, we need to load each of the raw TIF files, add the necessary metadata, and then resave the files. This is all handled automatically, but you need to specify a temporary location for the converted files to be stored. Stage positions are read from a `tilePositions.csv` file in each input section directory, which is generated automatically from `tilePositions.mat` if it isn't already present.
+1. *Temporary file conversion:* The raw TIF files from the BrainSaw are currently lacking critical metadata. This will hopefully not be the case in the future, but for now, in order to use BigStitcher, we need to load each of the raw TIF files, add the necessary metadata, and then resave the files. This is all handled automatically, but you need to specify a temporary location for the converted files to be stored. Stage positions are read from a `tilePositions.csv` file in each input section directory, which is generated automatically from `tilePositions.mat` if it isn't already present. If you supply `tilePositions.csv` yourself, it must have no header row - columns are read positionally. Input subdirectories with no `.tif` tiles (e.g. non-section folders like an `averageDir`) are skipped automatically.
 2. *Tile stitching:* BigStitcher is run on the converted files and produces a fused output for each section. Example outputs can be found in the [output-test](./output-test) folder.
 
 > [!IMPORTANT]
@@ -46,7 +46,7 @@ You now have everything ready to stitch and fuse your images. The scripts in thi
 To start the stitching process, using the demo data in this repo as an example, run the [submit_all_jobs.sh](./submit_all_jobs.sh) as follows:
 ```shell
 cd <path_to_this_repo>
-./submit_all_jobs.sh -i <input_base_dir> -c <converted_base_dir> -s <stitched_base_dir> [-f array_indices] [-n section_indices] [-x]
+./submit_all_jobs.sh -i <input_base_dir> -c <converted_base_dir> -s <stitched_base_dir> -j <fiji_path> [-l label_filter] [-f array_indices] [-n section_indices] [-x]
 ```
 where each parameter specifies the following:
 
