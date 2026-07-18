@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH --job-name=brainsaw-stitch
 #SBATCH --ntasks=1
-#SBATCH --time=0-01:00:00
-#SBATCH --mem=16G
+#SBATCH --time=0-02:00:00
+#SBATCH --mem=128G
 #SBATCH --partition=ncpu
 
 ml Java/1.8
 
 mkdir -p "$OUTPUT_DIR"
 
-timeout 5m "$FIJI_PATH" --headless -macro ./Run_BigStitcher.ijm "$INPUT_DIR,$OUTPUT_DIR"
+timeout 119m "$FIJI_PATH" --headless -macro ./Run_BigStitcher.ijm "$INPUT_DIR,$OUTPUT_DIR"
 
 exit 0
