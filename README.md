@@ -43,6 +43,9 @@ You now have everything ready to stitch and fuse your images. The scripts in thi
 > [!IMPORTANT]
 > Scripts must be executed from within the directory containing this repository.
 
+> [!TIP]
+> `submit_all_jobs.sh` is resumable. If a section's fused output already exists, that section is skipped entirely; otherwise only the tiles that haven't been converted yet are (re)submitted. So if a run fails partway through (e.g. an out-of-memory kill during stitching), just resubmit the same command and only the incomplete work will be repeated. This resume behaviour only applies to default (unfiltered) runs - passing `-f` always reprocesses exactly the tiles you specify.
+
 To start the stitching process, using the demo data in this repo as an example, run the [submit_all_jobs.sh](./submit_all_jobs.sh) as follows:
 ```shell
 cd <path_to_this_repo>
